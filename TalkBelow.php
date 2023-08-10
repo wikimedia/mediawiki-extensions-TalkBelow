@@ -55,6 +55,11 @@ class TalkBelow {
 			$talk = $redirectLookup->getRedirectTarget( $talk );
 		}
 
+		// Some pages, like the village pump, may have their talk page be a redirect to the subject page
+		if ( $title->equals( $talk ) ) {
+			return;
+		}
+
 		// Get the HTML of the talk page
 		$talkHtml = '';
 		if ( $talk->exists() ) {
