@@ -36,10 +36,7 @@ window.TalkBelow = {
 			return;
 		}
 
-		// Skip empty paragraphs
-		if ( !$comment[0].childNodes[0].nodeValue.trim() ) {
-			return;
-		}
+		// @todo Skip empty paragraphs
 
 		// Make the reply button
 		var replyButton = new OO.ui.ButtonInputWidget( {
@@ -260,6 +257,7 @@ window.TalkBelow = {
 		}
 
 		// Match all lines that contain the text
+		text = text.replace( /\u00a0/g, ' ' ); // Replace nbsp sometimes added by the browser
 		text = text.replace( /[.*+?^${}()|[\]\\]/g, '\\$&' ); // Escape special characters
 		var regexp = new RegExp( '.*' + text + '.*', 'g' );
 		var matches = TalkBelow.talkWikitext.match( regexp );
