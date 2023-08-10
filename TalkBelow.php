@@ -75,7 +75,7 @@ class TalkBelow {
 		$divider = Html::rawElement( 'span', [ 'class' => 'mw-editsection-divider' ], ' | ' );
 		$bracket2 = Html::rawElement( 'span', [ 'class' => 'mw-editsection-bracket' ], ']' );
 		$wrapper = Html::rawElement( 'span', [ 'class' => 'mw-editsection' ], $bracket . $view . $divider . $edit . $bracket2 );
-		$heading = Html::rawElement( 'h1', [ 'id' => 'talkbelow-heading' ], $context->msg( 'talk' ) . $wrapper );
+		$heading = Html::rawElement( 'h1', [ 'class' => 'talkbelow-heading' ], $context->msg( 'talk' ) . $wrapper );
 
 		// Build the button to add a new topic
 		$skin->getOutput()->enableOOUI();
@@ -83,10 +83,10 @@ class TalkBelow {
 			'label' => $context->msg( 'skin-action-addsection' ),
 			'href' => $talk->getLinkURL( 'action=edit&section=new' ),
 		] );
-		$addTopicWrapper = Html::rawElement( 'div', [ 'id' => 'talkbelow-add-topic-button' ], $addTopicButton );
+		$addTopicWrapper = Html::rawElement( 'div', [ 'class' => 'talkbelow-add-topic-button' ], $addTopicButton );
 
 		// Put everything together
-		$section = Html::rawElement( 'div', [ 'id' => 'talkbelow-section' ], $heading . $talkHtml . $addTopicWrapper );
+		$section = Html::rawElement( 'div', [  'id' => 'Talk', 'class' => 'talkbelow-section' ], $heading . $talkHtml . $addTopicWrapper );
 		$data = $section;
 	}
 }
