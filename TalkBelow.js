@@ -186,7 +186,7 @@ window.TalkBelow = {
 		};
 		new mw.Api().postWithEditToken( params ).done( function () {
 			TalkBelow.onSuccess( replyWikitext, replyButton, $formWrapper );
-		} );
+		} ).fail( TalkBelow.onError );
 	},
 
 	/**
@@ -396,16 +396,14 @@ window.TalkBelow = {
 			// @todo Make it via JavaScript
 			window.location.reload();
 
-		} ).fail( function ( error, data ) {
+		} ).fail( TalkBelow.onError );
+	},
 
-			// If something goes wrong, let the user know and restore the publish button
-			if ( 'error' in data && 'info' in data.error ) {
-				error = data.error.info;
-			}
-			mw.notify( mw.msg( 'talkbelow-error', error ) );
-			publishButton.setDisabled( false );
-
-		} );
+	onError: function ( error, data ) {
+		if ( 'error' in data && 'info' in data.error ) {
+			error = data.error.info;
+		}
+		mw.notify( mw.msg( 'talkbelow-error', error ) );
 	}
 };
 
