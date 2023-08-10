@@ -11,7 +11,7 @@ window.TalkBelow = {
 	init: function () {
 
 		// Only init when there's a talk section
-		var $section = $( '#talkbelow-section' );
+		var $section = $( '.talkbelow-section' );
 		if ( !$section.length ) {
 			return;
 		}
@@ -20,7 +20,7 @@ window.TalkBelow = {
 		TalkBelow.addNewTopicForm();
 
 		// Select only paragraphs and replies
-		$( 'p, dd', '#talkbelow-section' ).each( TalkBelow.addReplyButton );
+		$( 'p, dd', '.talkbelow-section' ).each( TalkBelow.addReplyButton );
 	},
 
 	/**
@@ -344,13 +344,13 @@ window.TalkBelow = {
 		var publishLayout = new OO.ui.HorizontalLayout( { items: [ publishButton ] } );
 		var formLayout = new OO.ui.FormLayout( { items: [ titleLayout, commentLayout, publishLayout ] } );
 		var $title = $( '<h2>' + mw.msg( 'talkbelow-new-topic' ) + '</h2>' );
-		var $form = $( '<div id="talkbelow-new-topic-form"></div>' ).append( $title, formLayout.$element );
+		var $form = $( '<div class="talkbelow-new-topic-form"></div>' ).append( $title, formLayout.$element );
 
 		// Make the font-family monospace to suggest that [[wikitext]] is allowed
 		commentInput.$element.css( 'font-family', 'monospace' );
 
 		// Replace the "Add topic" button for the form
-		$addTopicButton = $( '#talkbelow-add-topic-button' );
+		$addTopicButton = $( '.talkbelow-add-topic-button' );
 		$addTopicButton.replaceWith( $form );
 
 		// Handle submissions
@@ -360,7 +360,7 @@ window.TalkBelow = {
 	submitNewTopic: function ( publishButton ) {
 
 		// Get the data from the form
-		var $form =  publishButton.$element.closest( '#talkbelow-new-topic-form' );
+		var $form =  publishButton.$element.closest( '.talkbelow-new-topic-form' );
 		var $title = $form.find( 'input[name="title"]' );
 		var $comment = $form.find( 'textarea[name="comment"]' );
 		var title = $title.val();
