@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Sophivorus"
+		]
+	},
+	"talkbelow-desc": "Show the talk page below the content",
+	"talkbelow-reply": "Reply",
+	"talkbelow-cancel": "Cancel",
+	"talkbelow-new-topic": "New topic",
+	"talkbelow-title": "Title",
+	"talkbelow-comment": "Comment",
+	"talkbelow-publish": "Publish",
+	"talkbelow-summary": "Reply",
+	"talkbelow-error": "Something went wrong! $1"
+}

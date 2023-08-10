@@ -1,0 +1,46 @@
+{
+	"manifest_version": 2,
+	"name": "TalkBelow",
+	"version": "3.0",
+	"url": "https://www.mediawiki.org/wiki/Extension:TalkBelow",
+	"author": "[https://www.mediawiki.org/wiki/User:Sophivorus Sophivorus]",
+	"descriptionmsg": "talkbelow-desc",
+	"license-name": "GPL-3.0-or-later",
+	"type": "interface",
+	"requires": {
+		"MediaWiki": ">= 1.39.0"
+	},
+	"MessagesDirs": {
+		"TalkBelow": [
+			"i18n"
+		]
+	},
+	"ExtensionMessagesFiles": {
+		"TalkBelowMagic": "TalkBelow.magic.php"
+	},
+	"AutoloadClasses": {
+		"TalkBelow": "TalkBelow.php"
+	},
+	"Hooks": {
+		"GetDoubleUnderscoreIDs": "TalkBelow::onGetDoubleUnderscoreIDs",
+		"BeforePageDisplay": "TalkBelow::onBeforePageDisplay",
+		"SkinAfterContent": "TalkBelow::onSkinAfterContent"
+	},
+	"ResourceModules": {
+		"ext.TalkBelow": {
+			"scripts": "TalkBelow.js",
+			"localBasePath": "",
+			"remoteExtPath": "TalkBelow",
+			"messages": [
+				"talkbelow-reply",
+				"talkbelow-publish",
+				"talkbelow-cancel",
+				"talkbelow-new-topic",
+				"talkbelow-title",
+				"talkbelow-comment",
+				"talkbelow-reply",
+				"talkbelow-error"
+			]
+		}
+	}
+}

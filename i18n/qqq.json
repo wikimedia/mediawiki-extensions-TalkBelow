@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Sophivorus"
+		]
+	},
+	"talkbelow-desc": "{{desc|name=TalkBelow|url=https://www.mediawiki.org/wiki/Extension:TalkBelow}}",
+	"talkbelow-reply": "Label of the button to open the reply form",
+	"talkbelow-cancel": "Label of the button to close the reply form",
+	"talkbelow-new-topic": "Title of the new topic section",
+	"talkbelow-title": "Placeholder of the title field for new topics",
+	"talkbelow-comment": "Placeholder of the comment field for new topics",
+	"talkbelow-publish": "Label of the button to publish a new topic or reply",
+	"talkbelow-summary": "Automatic edit summary when replying",
+	"talkbelow-error": "Error message when something goes wrong"
+}
