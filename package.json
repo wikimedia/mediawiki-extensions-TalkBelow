@@ -1,5 +1,5 @@
 {
-	"name": "CategoryLockdown",
+	"name": "TalkBelow",
 	"private": true,
 	"scripts": {
 		"test": "grunt test"

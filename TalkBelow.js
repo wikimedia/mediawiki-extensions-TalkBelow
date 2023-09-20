@@ -43,7 +43,7 @@ window.TalkBelow = {
 			flags: 'progressive',
 			framed: false,
 			label: mw.msg( 'talkbelow-reply' ),
-			classes: [ 'talkbelow-button', 'noprint' ]
+			classes: [ 'talkbelow-button' ]
 		} );
 		replyButton.$element.css( 'margin', '-8px 0' );
 		replyButton.on( 'click', TalkBelow.onReplyButtonClick, [ replyButton ] );

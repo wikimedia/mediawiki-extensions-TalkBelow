@@ -86,7 +86,7 @@ class TalkBelow {
 		$addTopicWrapper = Html::rawElement( 'div', [ 'class' => 'talkbelow-add-topic-button' ], $addTopicButton );
 
 		// Put everything together
-		$section = Html::rawElement( 'div', [  'id' => 'Talk', 'class' => 'talkbelow-section' ], $heading . $talkHtml . $addTopicWrapper );
+		$section = Html::rawElement( 'div', [  'id' => 'Talk', 'class' => 'talkbelow-section noprint' ], $heading . $talkHtml . $addTopicWrapper );
 		$data = $section;
 	}
 }
