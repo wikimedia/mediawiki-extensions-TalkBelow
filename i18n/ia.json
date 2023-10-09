@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"McDutchie"
+		]
+	},
+	"talkbelow-desc": "Monstrar le pagina de discussion sub le contento",
+	"talkbelow-reply": "Responder",
+	"talkbelow-cancel": "Cancellar",
+	"talkbelow-new-topic": "Nove topico",
+	"talkbelow-title": "Titulo",
+	"talkbelow-comment": "Commento",
+	"talkbelow-publish": "Publicar",
+	"talkbelow-summary": "Responder",
+	"talkbelow-error": "Qualcosa ha vadite mal! $1"
+}

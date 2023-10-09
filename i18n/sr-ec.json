@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Milicevic01"
+		]
+	},
+	"talkbelow-reply": "Одговори",
+	"talkbelow-cancel": "Откажи",
+	"talkbelow-new-topic": "Нова тема",
+	"talkbelow-title": "Наслов",
+	"talkbelow-comment": "Коментар",
+	"talkbelow-publish": "Објави",
+	"talkbelow-summary": "Одговор",
+	"talkbelow-error": "Дошло је до грешке! $1"
+}

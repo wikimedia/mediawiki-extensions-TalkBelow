@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Amire80"
+		]
+	},
+	"talkbelow-desc": "הצגת דף השיחה מתחת לתוכן",
+	"talkbelow-reply": "תגובה",
+	"talkbelow-cancel": "ביטול",
+	"talkbelow-new-topic": "נושא חדש",
+	"talkbelow-title": "כותרת",
+	"talkbelow-comment": "הערה",
+	"talkbelow-publish": "פרסום",
+	"talkbelow-summary": "תגובה",
+	"talkbelow-error": "משהו השתבש! $1"
+}

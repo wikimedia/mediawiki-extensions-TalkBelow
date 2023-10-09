@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Volvox"
+		]
+	},
+	"talkbelow-desc": "Weist d'Diskussiounssäit ënnert dem Inhalt",
+	"talkbelow-reply": "Äntwerten",
+	"talkbelow-cancel": "Ofbriechen",
+	"talkbelow-new-topic": "Neit Theema",
+	"talkbelow-title": "Titel",
+	"talkbelow-comment": "Bemierkung",
+	"talkbelow-publish": "Verëffentlechen",
+	"talkbelow-summary": "Äntwerten",
+	"talkbelow-error": "Et ass eppes schif gaangen! $1"
+}

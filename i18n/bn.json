@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"আফতাবুজ্জামান"
+		]
+	},
+	"talkbelow-desc": "বিষয়বস্তুর নিচে আলাপ পাতা দেখায়",
+	"talkbelow-reply": "উত্তর দিন",
+	"talkbelow-cancel": "বাতিল",
+	"talkbelow-new-topic": "নতুন আলোচনা",
+	"talkbelow-title": "শিরোনাম",
+	"talkbelow-comment": "মন্তব্য",
+	"talkbelow-publish": "প্রকাশ করুন",
+	"talkbelow-summary": "উত্তর দিন",
+	"talkbelow-error": "কিছু একটায় ত্রুটি হয়েছে! $1"
+}

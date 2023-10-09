@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Brettchenweber"
+		]
+	},
+	"talkbelow-desc": "Zeigt die Diskussionsseite unter dem Inhalt an",
+	"talkbelow-reply": "Antworten",
+	"talkbelow-cancel": "Abbrechen",
+	"talkbelow-new-topic": "Neues Thema",
+	"talkbelow-title": "Titel",
+	"talkbelow-comment": "Kommentar",
+	"talkbelow-publish": "Veröffentlichen",
+	"talkbelow-summary": "Antworten",
+	"talkbelow-error": "Etwas ist schiefgelaufen! $1"
+}

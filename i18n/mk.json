@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Bjankuloski06"
+		]
+	},
+	"talkbelow-desc": "Прикажувај ја разговорната страница под содржината",
+	"talkbelow-reply": "Одговори",
+	"talkbelow-cancel": "Откажи",
+	"talkbelow-new-topic": "Нова тема",
+	"talkbelow-title": "Наслов",
+	"talkbelow-comment": "Коментар",
+	"talkbelow-publish": "Објави",
+	"talkbelow-summary": "Одговори",
+	"talkbelow-error": "Нешто не е во ред! $1"
+}

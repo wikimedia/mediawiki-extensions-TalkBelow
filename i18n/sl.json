@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Eleassar"
+		]
+	},
+	"talkbelow-reply": "Odgovori",
+	"talkbelow-new-topic": "Nova tema",
+	"talkbelow-error": "Nekaj je šlo narobe! $1"
+}
