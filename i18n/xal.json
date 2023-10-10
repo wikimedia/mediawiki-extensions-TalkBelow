@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ukhant Erdemt"
+		]
+	},
+	"talkbelow-desc": "Аһулһин дор күүндврин халх үзүл",
+	"talkbelow-reply": "Хәрүлх",
+	"talkbelow-cancel": "Уурулх",
+	"talkbelow-new-topic": "Шин седв",
+	"talkbelow-title": "Һарцг",
+	"talkbelow-comment": "Comment",
+	"talkbelow-publish": "Һарһх",
+	"talkbelow-summary": "Хәрүлх",
+	"talkbelow-error": "Ямр нег зүүл буруһар эргв! $1"
+}
