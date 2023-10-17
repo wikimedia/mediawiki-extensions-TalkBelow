@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Hedda"
+		]
+	},
+	"talkbelow-desc": "Tartışma sayfasını içeriğin altında göster",
+	"talkbelow-reply": "Yanıtla",
+	"talkbelow-cancel": "İptal",
+	"talkbelow-new-topic": "Yeni konu",
+	"talkbelow-title": "Başlık",
+	"talkbelow-comment": "Yorum",
+	"talkbelow-publish": "Yayımla",
+	"talkbelow-summary": "Yanıtla",
+	"talkbelow-error": "Bir şeyler yanlış gitti! $1"
+}
