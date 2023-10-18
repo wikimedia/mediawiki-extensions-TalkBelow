@@ -5,6 +5,11 @@
 		]
 	},
 	"talkbelow-reply": "Odgovori",
+	"talkbelow-cancel": "Prekliči",
 	"talkbelow-new-topic": "Nova tema",
+	"talkbelow-title": "Naslov",
+	"talkbelow-comment": "Komentar",
+	"talkbelow-publish": "Objavi",
+	"talkbelow-summary": "Odgovori",
 	"talkbelow-error": "Nekaj je šlo narobe! $1"
 }

@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Beta16"
+		]
+	},
+	"talkbelow-desc": "Mostra la pagina di discussione sotto il contenuto",
+	"talkbelow-reply": "Rispondi",
+	"talkbelow-cancel": "Annulla",
+	"talkbelow-new-topic": "Nuovo argomento",
+	"talkbelow-title": "Titolo",
+	"talkbelow-comment": "Commento",
+	"talkbelow-publish": "Pubblica",
+	"talkbelow-summary": "Risposta",
+	"talkbelow-error": "Qualcosa è andato storto! $1"
+}
