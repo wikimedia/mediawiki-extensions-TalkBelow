@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "TalkBelow",
-	"version": "3.1",
+	"version": "4.0",
 	"url": "https://www.mediawiki.org/wiki/Extension:TalkBelow",
 	"author": "[https://www.mediawiki.org/wiki/User:Sophivorus Sophivorus]",
 	"descriptionmsg": "talkbelow-desc",
@@ -25,7 +25,8 @@
 		"BeforePageDisplay": "TalkBelow::onBeforePageDisplay",
 		"GetDoubleUnderscoreIDs": "TalkBelow::onGetDoubleUnderscoreIDs",
 		"ResourceLoaderGetConfigVars": "TalkBelow::onResourceLoaderGetConfigVars",
-		"SkinAfterContent": "TalkBelow::onSkinAfterContent"
+		"SkinAfterContent": "TalkBelow::onSkinAfterContent",
+		"SkinTemplateNavigation::Universal": "TalkBelow::onSkinTemplateNavigationUniversal"
 	},
 	"ResourceModules": {
 		"ext.TalkBelow": {

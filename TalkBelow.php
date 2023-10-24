@@ -31,6 +31,24 @@ class TalkBelow {
 	}
 
 	/**
+	 * Hide the Talk button
+	 *
+	 * @param SkinTemplate $skinTemplate
+	 * @param array &$links
+	 */
+	public static function onSkinTemplateNavigationUniversal( SkinTemplate $skinTemplate, array &$links ) {
+		$title = $skinTemplate->getTitle();
+		if ( !$title->exists() ) {
+			return;
+		}
+		$parserOutput = $skinTemplate->getWikiPage()->getParserOutput();
+		if ( $parserOutput->getPageProperty( 'NOTALKBELOW' ) !== null ) {
+			return;
+		}
+		unset( $links['namespaces']['talk'] );
+	}
+
+	/**
 	 * Show the talk below section
 	 *
 	 * @param string &$data
@@ -96,7 +114,7 @@ class TalkBelow {
 		$bracket2 = Html::rawElement( 'span', [ 'class' => 'mw-editsection-bracket' ], ']' );
 		$editsection = $bracket . $view . $divider . $edit . $bracket2;
 		$wrapper = Html::rawElement( 'span', [ 'class' => 'mw-editsection' ], $editsection );
-		$heading = Html::rawElement( 'h1', [ 'class' => 'talkbelow-heading' ], $context->msg( 'talk' ) . $wrapper );
+		$heading = Html::rawElement( 'h1', [ 'id' => 'talkbelow-heading' ], $context->msg( 'talk' ) . $wrapper );
 
 		// Build the button to add a new topic
 		$skin->getOutput()->enableOOUI();
@@ -104,11 +122,11 @@ class TalkBelow {
 			'label' => $context->msg( 'skin-action-addsection' ),
 			'href' => $talk->getLinkURL( 'action=edit&section=new' ),
 		] );
-		$addTopicWrapper = Html::rawElement( 'div', [ 'class' => 'talkbelow-add-topic-button' ], $addTopicButton );
+		$addTopicWrapper = Html::rawElement( 'div', [ 'id' => 'talkbelow-add-topic-button' ], $addTopicButton );
 
 		// Put everything together
 		$section = $heading . $talkHtml . $addTopicWrapper;
-		$section = Html::rawElement( 'div', [ 'id' => 'Talk', 'class' => 'talkbelow-section noprint' ], $section );
+		$section = Html::rawElement( 'div', [ 'id' => 'talkbelow-section', 'class' => 'noprint' ], $section );
 		$data = $section;
 	}
 }

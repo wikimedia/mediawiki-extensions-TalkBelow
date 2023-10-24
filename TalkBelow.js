@@ -11,8 +11,8 @@ window.TalkBelow = {
 	init: function () {
 
 		// Only init when there's a talk section
-		var $section = $( '.talkbelow-section' );
-		if ( !$section.length ) {
+		var section = document.getElementById( 'talkbelow-section' );
+		if ( !section ) {
 			return;
 		}
 
@@ -20,7 +20,7 @@ window.TalkBelow = {
 		TalkBelow.addNewTopicForm();
 
 		// Select only paragraphs and replies
-		$( 'p, dd', '.talkbelow-section' ).each( TalkBelow.addReplyButton );
+		$( 'p, dd', section ).each( TalkBelow.addReplyButton );
 	},
 
 	/**
@@ -35,8 +35,6 @@ window.TalkBelow = {
 		if ( $comment.next().is( 'p' ) ) {
 			return;
 		}
-
-		// @todo Skip empty paragraphs
 
 		// Make the reply button
 		var replyButton = new OO.ui.ButtonInputWidget( {
@@ -136,7 +134,7 @@ window.TalkBelow = {
 		$formWrapper.find( 'textarea[name="reply"]' ).trigger( 'focus' );
 
 		// Handle a submission
-		publishButton.on( 'click', TalkBelow.submitReplyForm, [ $comment, $formWrapper, relevantWikitext, publishButton, cancelButton, replyButton ] );
+		publishButton.on( 'click', TalkBelow.onSubmitReply, [ $comment, $formWrapper, relevantWikitext, publishButton, cancelButton, replyButton ] );
 
 		// Handle a cancel
 		cancelButton.on( 'click', function () {
@@ -158,7 +156,7 @@ window.TalkBelow = {
 	 * @param {Object} cancelButton
 	 * @param {Object} replyButton
 	 */
-	submitReplyForm: function ( $comment, $formWrapper, relevantWikitext, publishButton, cancelButton, replyButton ) {
+	onSubmitReply: function ( $comment, $formWrapper, relevantWikitext, publishButton, cancelButton, replyButton ) {
 
 		// Check that the user wrote something
 		var $reply = $formWrapper.find( 'textarea[name="reply"]' );
@@ -198,19 +196,19 @@ window.TalkBelow = {
 			summary: mw.msg( 'talkbelow-summary' ),
 			tags: mw.config.get( 'wgTalkBelowChangeTag' )
 		};
-		new mw.Api().postWithEditToken( params ).done( function () {
-			TalkBelow.onSuccess( replyWikitext, replyButton, $formWrapper );
-		} ).fail( TalkBelow.onError );
+		new mw.Api().postWithEditToken( params ).fail( TalkBelow.onError ).done( function () {
+			TalkBelow.onSubmitReplySuccess( replyWikitext, replyButton, $formWrapper );
+		} );
 	},
 
 	/**
-	 * Callback on successful edits
+	 * Handle a successful reply
 	 *
 	 * @param {string} replyWikitext
 	 * @param {Object} replyButton
 	 * @param {Object} $formWrapper
 	 */
-	onSuccess: function ( replyWikitext, replyButton, $formWrapper ) {
+	onSubmitReplySuccess: function ( replyWikitext, replyButton, $formWrapper ) {
 		var page = mw.config.get( 'wgPageName' );
 		var talk = new mw.Title( page ).getTalkPage();
 		var params = {
@@ -222,7 +220,7 @@ window.TalkBelow = {
 			prop: 'text',
 			disablelimitreport: true
 		};
-		new mw.Api().get( params ).done( function ( data ) {
+		new mw.Api().get( params ).fail( TalkBelow.onError ).done( function ( data ) {
 			var text = data.parse.text;
 			var $html = $( text );
 			var $reply = $html.find( 'dd' ).last();
@@ -233,7 +231,123 @@ window.TalkBelow = {
 	},
 
 	/**
-	 * Get the wikitext of the relevant talk page
+	 * Add the new topic form
+	 */
+	addNewTopicForm: function () {
+
+		// Build the form
+		var titleInput = new OO.ui.TextInputWidget( { name: 'title', placeholder: mw.msg( 'talkbelow-title' ) } );
+		var commentInput = new OO.ui.MultilineTextInputWidget( { name: 'comment', autosize: true, placeholder: mw.msg( 'talkbelow-comment' ) } );
+		var publishButton = new OO.ui.ButtonInputWidget( { flags: [ 'primary', 'progressive' ], label: mw.msg( 'talkbelow-publish' ) } );
+		var titleLayout = new OO.ui.HorizontalLayout( { items: [ titleInput ] } );
+		var commentLayout = new OO.ui.HorizontalLayout( { items: [ commentInput ] } );
+		var publishLayout = new OO.ui.HorizontalLayout( { items: [ publishButton ] } );
+		var formLayout = new OO.ui.FormLayout( { items: [ titleLayout, commentLayout, publishLayout ] } );
+		var $title = $( '<h2>' ).text( mw.msg( 'talkbelow-new-topic' ) );
+		var $form = $( '<div>' ).attr( 'id', 'talkbelow-new-topic-form' ).append( $title, formLayout.$element );
+
+		// Make the font-family monospace to suggest that [[wikitext]] is allowed
+		commentInput.$element.css( 'font-family', 'monospace' );
+
+		// Replace the "Add topic" button for the form
+		var addTopicButton = document.getElementById( 'talkbelow-add-topic-button' );
+		var $addTopicButton = $( addTopicButton );
+		$addTopicButton.replaceWith( $form );
+
+		// Handle submissions
+		publishButton.on( 'click', TalkBelow.onSubmitNewTopic, [ publishButton ] );
+	},
+
+	/**
+	 * @param {Object} publishButton
+	 */
+	onSubmitNewTopic: function ( publishButton ) {
+
+		// Get the data from the form
+		var $form = publishButton.$element.closest( '#talkbelow-new-topic-form' );
+		var $title = $form.find( 'input[name="title"]' );
+		var $comment = $form.find( 'textarea[name="comment"]' );
+		var title = $title.val();
+		var comment = $comment.val();
+
+		// Do some basic validation
+		if ( !title ) {
+			$title.trigger( 'focus' );
+			return;
+		}
+		if ( !comment ) {
+			$comment.trigger( 'focus' );
+			return;
+		}
+
+		// Disable the Publish button
+		// to prevent further clicks and to signal the user that something is happening
+		publishButton.setDisabled( true );
+
+		// Submit the new topic
+		var page = mw.config.get( 'wgPageName' );
+		var talk = new mw.Title( page ).getTalkPage();
+		var text = comment + ' ~~~~'; // Append the signature
+		var params = {
+			action: 'edit',
+			title: talk.getPrefixedText(),
+			section: 'new',
+			sectiontitle: title,
+			text: text,
+			tags: mw.config.get( 'wgTalkBelowChangeTag' )
+		};
+		new mw.Api().postWithEditToken( params ).fail( TalkBelow.onError ).done( function () {
+			TalkBelow.onSubmitNewTopicSuccess( talk, title, text, $form );
+		} );
+	},
+
+	/**
+	 * Handle a successful new topic submission
+	 *
+	 * @param {string} talk Talk page where the new topic was posted
+	 * @param {string} title Title of the new topic
+	 * @param {string} text Text of the new topic
+	 * @param {Object} $form New topic form
+	 */
+	onSubmitNewTopicSuccess: function ( talk, title, text, $form ) {
+		var params = {
+			action: 'parse',
+			title: talk.getPrefixedText(),
+			section: 'new',
+			sectiontitle: title,
+			text: text,
+			formatversion: 2,
+			prop: 'text',
+			pst: true,
+			disablelimitreport: true
+		};
+		new mw.Api().get( params ).fail( TalkBelow.onError ).done( function ( data ) {
+			// Remove the outer <div>
+			var div = data.parse.text;
+			var topic = $( div ).html();
+			var $topic = $( topic );
+
+			// Replace the form with the new topic
+			$form.replaceWith( $topic );
+			$topic.find( 'p' ).each( TalkBelow.addReplyButton );
+		} );
+	},
+
+	/**
+	 * Handle an API error
+	 *
+	 * @param {string} error
+	 * @param {Object} data
+	 */
+	onError: function ( error, data ) {
+		if ( 'error' in data && 'info' in data.error ) {
+			error = data.error.info;
+		}
+		mw.notify( mw.msg( 'talkbelow-error', error ) );
+	},
+
+	/**
+	 * Helper method to get the wikitext of the relevant talk page
 	 *
 	 * @return {Object} Promise
 	 */
@@ -279,7 +393,9 @@ window.TalkBelow = {
 		// Match all lines that contain the text
 		text = text.replace( /\u00a0/g, ' ' ); // Replace nbsp sometimes added by the browser
 		text = text.replace( /[.*+?^${}()|[\]\\]/g, '\\$&' ); // Escape special characters
+		/* eslint-disable */
 		var regexp = new RegExp( '.*' + text + '.*', 'g' );
+		/* eslint-enable */
 		var matches = TalkBelow.talkWikitext.match( regexp );
 
 		// This may happen if the comments comes from a template
@@ -358,87 +474,6 @@ window.TalkBelow = {
 		}
 		var $parent = $element.parent();
 		return TalkBelow.getSection( $parent );
-	},
-
-	addNewTopicForm: function () {
-
-		// Build the form
-		var titleInput = new OO.ui.TextInputWidget( { name: 'title', placeholder: mw.msg( 'talkbelow-title' ) } );
-		var commentInput = new OO.ui.MultilineTextInputWidget( { name: 'comment', autosize: true, placeholder: mw.msg( 'talkbelow-comment' ) } );
-		var publishButton = new OO.ui.ButtonInputWidget( { flags: [ 'primary', 'progressive' ], label: mw.msg( 'talkbelow-publish' ) } );
-		var titleLayout = new OO.ui.HorizontalLayout( { items: [ titleInput ] } );
-		var commentLayout = new OO.ui.HorizontalLayout( { items: [ commentInput ] } );
-		var publishLayout = new OO.ui.HorizontalLayout( { items: [ publishButton ] } );
-		var formLayout = new OO.ui.FormLayout( { items: [ titleLayout, commentLayout, publishLayout ] } );
-		var $title = $( '<h2>' ).text( mw.msg( 'talkbelow-new-topic' ) );
-		var $form = $( '<div>' ).addClass( 'talkbelow-new-topic-form' ).append( $title, formLayout.$element );
-
-		// Make the font-family monospace to suggest that [[wikitext]] is allowed
-		commentInput.$element.css( 'font-family', 'monospace' );
-
-		// Replace the "Add topic" button for the form
-		var $addTopicButton = $( '.talkbelow-add-topic-button' );
-		$addTopicButton.replaceWith( $form );
-
-		// Handle submissions
-		publishButton.on( 'click', TalkBelow.submitNewTopic, [ publishButton ] );
-	},
-
-	/**
-	 * @param {Object} publishButton
-	 */
-	submitNewTopic: function ( publishButton ) {
-
-		// Get the data from the form
-		var $form = publishButton.$element.closest( '.talkbelow-new-topic-form' );
-		var $title = $form.find( 'input[name="title"]' );
-		var $comment = $form.find( 'textarea[name="comment"]' );
-		var title = $title.val();
-		var comment = $comment.val();
-
-		// Do some basic validation
-		if ( !title ) {
-			$title.trigger( 'focus' );
-			return;
-		}
-		if ( !comment ) {
-			$comment.trigger( 'focus' );
-			return;
-		}
-
-		// Disable the Publish button
-		// to prevent further clicks and to signal the user that something is happening
-		publishButton.setDisabled( true );
-
-		// Submit the new topic
-		var page = mw.config.get( 'wgPageName' );
-		var talk = new mw.Title( page ).getTalkPage();
-		var params = {
-			action: 'edit',
-			title: talk.getPrefixedText(),
-			section: 'new',
-			sectiontitle: title,
-			text: comment + ' ~~~~', // Append the signature
-			tags: mw.config.get( 'wgTalkBelowChangeTag' )
-		};
-		new mw.Api().postWithEditToken( params ).done( function () {
-
-			// If all goes well, reload the page to show the user their comment
-			// @todo Make it via JavaScript
-			window.location.reload();
-
-		} ).fail( TalkBelow.onError );
-	},
-
-	/**
-	 * @param {string} error
-	 * @param {Object} data
-	 */
-	onError: function ( error, data ) {
-		if ( 'error' in data && 'info' in data.error ) {
-			error = data.error.info;
-		}
-		mw.notify( mw.msg( 'talkbelow-error', error ) );
 	}
 };
 
