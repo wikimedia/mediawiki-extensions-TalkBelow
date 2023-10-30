@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Kly"
+		]
+	},
+	"talkbelow-desc": "在內容下方顯示討論頁面",
+	"talkbelow-reply": "回覆",
+	"talkbelow-cancel": "取消",
+	"talkbelow-new-topic": "新話題",
+	"talkbelow-title": "標題",
+	"talkbelow-comment": "意見",
+	"talkbelow-publish": "發布",
+	"talkbelow-summary": "回覆",
+	"talkbelow-error": "發生錯誤！$1"
+}
