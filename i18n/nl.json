@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Vistaus"
+		]
+	},
+	"talkbelow-desc": "Overlegpagina onder de inhoud tonen",
+	"talkbelow-reply": "Reageren",
+	"talkbelow-cancel": "Annuleren",
+	"talkbelow-new-topic": "Nieuw onderwerp",
+	"talkbelow-title": "Titel",
+	"talkbelow-comment": "Reactie",
+	"talkbelow-publish": "Plaatsen",
+	"talkbelow-summary": "Reageren",
+	"talkbelow-error": "Er is iets misgegaan! $1"
+}
