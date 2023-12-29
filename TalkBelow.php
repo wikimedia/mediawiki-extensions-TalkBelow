@@ -1,8 +1,17 @@
 <?php
 
+use MediaWiki\Hook\SkinAfterContentHook;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Page\WikiPageFactory;
 
-class TalkBelow {
+class TalkBelow implements SkinAfterContentHook {
+
+	/** @var WikiPageFactory */
+	private $wikiPageFactory;
+
+	public function __construct( WikiPageFactory $wikiPageFactory ) {
+		$this->wikiPageFactory = $wikiPageFactory;
+	}
 
 	/**
 	 * @param OutputPage &$out
@@ -54,9 +63,7 @@ class TalkBelow {
 	 * @param string &$data
 	 * @param Skin $skin
 	 */
-	public static function onSkinAfterContent( &$data, Skin $skin ) {
-		$config = $skin->getConfig();
-
+	public function onSkinAfterContent( &$data, $skin ) {
 		// Only show when viewing pages
 		$context = $skin->getContext();
 		$action = Action::getActionName( $context );
@@ -101,7 +108,7 @@ class TalkBelow {
 		// Get the HTML of the talk page
 		$talkHtml = '';
 		if ( $talk->exists() ) {
-			$talkPage = WikiPage::factory( $talk );
+			$talkPage = $this->wikiPageFactory->newFromLinkTarget( $talk );
 			$talkOutput = $talkPage->getParserOutput();
 			$talkHtml = $talkOutput->getText( [ 'allowTOC' => false ] );
 		}
