@@ -41,6 +41,10 @@
 			"scripts": "TalkBelow.js",
 			"localBasePath": "",
 			"remoteExtPath": "TalkBelow",
+			"dependencies": [
+				"oojs-ui-core",
+				"oojs-ui-widgets"
+			],
 			"messages": [
 				"talkbelow-reply",
 				"talkbelow-publish",
