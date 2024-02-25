@@ -18,6 +18,7 @@ class TalkBelow implements SkinAfterContentHook {
 	 * @param Skin &$skin
 	 */
 	public static function onBeforePageDisplay( OutputPage &$out, Skin &$skin ) {
+		$out->addModuleStyles( 'mediawiki.ui.button' );
 		$out->addModules( 'ext.TalkBelow' );
 	}
 
@@ -123,12 +124,15 @@ class TalkBelow implements SkinAfterContentHook {
 		$wrapper = Html::rawElement( 'span', [ 'class' => 'mw-editsection' ], $editsection );
 		$heading = Html::rawElement( 'h1', [ 'id' => 'talkbelow-heading' ], $context->msg( 'talk' ) . $wrapper );
 
-		// Build the button to add a new topic
-		$skin->getOutput()->enableOOUI();
-		$addTopicButton = new OOUI\ButtonWidget( [
-			'label' => $context->msg( 'skin-action-addsection' ),
-			'href' => $talk->getLinkURL( 'action=edit&section=new' ),
-		] );
+		// Build the button to add a new topic. This will be replaced in the frontend, but is needed for non-JS users.
+		$addTopicButton = HTML::element(
+			'a',
+			[
+				'class' => [ 'mw-ui-button' ],
+				'href' => $talk->getLinkURL( 'action=edit&section=new' ),
+			],
+			$context->msg( 'skin-action-addsection' )
+		);
 		$addTopicWrapper = Html::rawElement( 'div', [ 'id' => 'talkbelow-add-topic-button' ], $addTopicButton );
 
 		// Put everything together
