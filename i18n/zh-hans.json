@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"沈澄心"
+		]
+	},
+	"talkbelow-desc": "在内容下方显示讨论页面",
+	"talkbelow-reply": "回复",
+	"talkbelow-cancel": "取消",
+	"talkbelow-new-topic": "新话题",
+	"talkbelow-title": "标题",
+	"talkbelow-comment": "评论",
+	"talkbelow-publish": "发布",
+	"talkbelow-summary": "回复",
+	"talkbelow-error": "发生错误！$1"
+}
