@@ -393,9 +393,9 @@ window.TalkBelow = {
 		// Match all lines that contain the text
 		text = text.replace( /\u00a0/g, ' ' ); // Replace nbsp sometimes added by the browser
 		text = text.replace( /[.*+?^${}()|[\]\\]/g, '\\$&' ); // Escape special characters
-		/* eslint-disable */
+
 		var regexp = new RegExp( '.*' + text + '.*', 'g' );
-		/* eslint-enable */
+
 		var matches = TalkBelow.talkWikitext.match( regexp );
 
 		// This may happen if the comments comes from a template
