@@ -1,10 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
+			"Siebrand",
 			"Vistaus"
 		]
 	},
-	"talkbelow-desc": "Overlegpagina onder de inhoud tonen",
+	"talkbelow-desc": "Overlegpagina onder de inhoud weergeven",
 	"talkbelow-reply": "Reageren",
 	"talkbelow-cancel": "Annuleren",
 	"talkbelow-new-topic": "Nieuw onderwerp",
