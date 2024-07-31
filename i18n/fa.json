@@ -1,12 +1,17 @@
 {
 	"@metadata": {
 		"authors": [
-			"Rulebased"
+			"Rulebased",
+			"Ebrahim"
 		]
 	},
-	"talkbelow-reply": "پاسخ‌دادن",
+	"talkbelow-desc": "نمایش صفحه بحث زیر محتوا",
+	"talkbelow-reply": "پاسخ",
+	"talkbelow-cancel": "لغو",
 	"talkbelow-new-topic": "مبحث تازه",
 	"talkbelow-title": "عنوان",
 	"talkbelow-comment": "نظرات",
-	"talkbelow-publish": "منتشر کنید"
+	"talkbelow-publish": "منتشر کنید",
+	"talkbelow-summary": "پاسخ",
+	"talkbelow-error": "مشکلی وجود داردǃ $1"
 }
