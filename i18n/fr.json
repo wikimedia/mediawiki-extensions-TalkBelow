@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"SleaY"
+		]
+	},
+	"talkbelow-reply": "Répondre",
+	"talkbelow-cancel": "Annuler",
+	"talkbelow-new-topic": "Nouveau sujet",
+	"talkbelow-title": "Titre",
+	"talkbelow-comment": "Commentaire",
+	"talkbelow-publish": "Publier",
+	"talkbelow-summary": "Répondre",
+	"talkbelow-error": "Quelque chose s’est mal passé ! $1"
+}
