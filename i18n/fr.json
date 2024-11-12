@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"SleaY"
+			"SleaY",
+			"Mahabarata"
 		]
 	},
+	"talkbelow-desc": "Afficher la page de discussion sous le contenu",
 	"talkbelow-reply": "Répondre",
 	"talkbelow-cancel": "Annuler",
 	"talkbelow-new-topic": "Nouveau sujet",
