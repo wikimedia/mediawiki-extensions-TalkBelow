@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Meno25"
+		]
+	},
+	"talkbelow-desc": "إظهار صفحة المناقشة أسفل المحتوى",
+	"talkbelow-reply": "رد",
+	"talkbelow-cancel": "إلغاء",
+	"talkbelow-new-topic": "موضوع جديد",
+	"talkbelow-title": "العنوان",
+	"talkbelow-comment": "تعليق",
+	"talkbelow-publish": "نشر",
+	"talkbelow-summary": "رد",
+	"talkbelow-error": "لقد حدث خطأ ما! $1"
+}
