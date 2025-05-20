@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": []
+	},
+	"talkbelow-reply": "Odgovori",
+	"talkbelow-cancel": "Otkaži",
+	"talkbelow-new-topic": "Nova tema",
+	"talkbelow-title": "Naslov",
+	"talkbelow-comment": "Komentar",
+	"talkbelow-publish": "Objavi",
+	"talkbelow-summary": "Odgovor",
+	"talkbelow-error": "Došlo je do greške! $1"
+}
