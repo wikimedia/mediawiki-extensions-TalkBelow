@@ -1,6 +1,7 @@
 <?php
 
 use MediaWiki\Hook\SkinAfterContentHook;
+use MediaWiki\Html\Html;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Page\WikiPageFactory;
 
@@ -125,7 +126,7 @@ class TalkBelow implements SkinAfterContentHook {
 		$heading = Html::rawElement( 'h1', [ 'id' => 'talkbelow-heading' ], $context->msg( 'talk' ) . $wrapper );
 
 		// Build the button to add a new topic. This will be replaced in the frontend, but is needed for non-JS users.
-		$addTopicButton = HTML::element(
+		$addTopicButton = Html::element(
 			'a',
 			[
 				'class' => [ 'mw-ui-button' ],
