@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Toliño"
+		]
+	},
+	"talkbelow-desc": "Mostrar a páxina de conversa debaixo do contido",
+	"talkbelow-reply": "Responder",
+	"talkbelow-cancel": "Cancelar",
+	"talkbelow-new-topic": "Novo fío",
+	"talkbelow-title": "Título",
+	"talkbelow-comment": "Comentario",
+	"talkbelow-publish": "Publicar",
+	"talkbelow-summary": "Responder",
+	"talkbelow-error": "Algo foi mal! $1"
+}
