@@ -1,0 +1,14 @@
+[
+	{
+		"@note": "opt-out, see https://www.mediawiki.org/wiki/Performance_budgeting",
+		"resourceModule": "mediawiki.ui.button",
+		"ignoreDependencies": true,
+		"maxSize": null
+	},
+	{
+		"@note": "opt-out, see https://www.mediawiki.org/wiki/Performance_budgeting",
+		"resourceModule": "ext.TalkBelow",
+		"ignoreDependencies": true,
+		"maxSize": null
+	}
+]
