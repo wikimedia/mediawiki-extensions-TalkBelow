@@ -11,7 +11,7 @@ window.TalkBelow = {
 	init: function () {
 
 		// Only init when there's a talk section
-		var section = document.getElementById( 'talkbelow-section' );
+		const section = document.getElementById( 'talkbelow-section' );
 		if ( !section ) {
 			return;
 		}
@@ -27,7 +27,7 @@ window.TalkBelow = {
 	 * Add a reply button
 	 */
 	addReplyButton: function () {
-		var $comment = $( this );
+		const $comment = $( this );
 
 		// Skip paragraphs followed by other paragraphs
 		// so that only the last one shows the reply button
@@ -37,7 +37,7 @@ window.TalkBelow = {
 		}
 
 		// Make the reply button
-		var replyButton = new OO.ui.ButtonInputWidget( {
+		const replyButton = new OO.ui.ButtonInputWidget( {
 			flags: 'progressive',
 			framed: false,
 			label: mw.msg( 'talkbelow-reply' ),
@@ -47,7 +47,7 @@ window.TalkBelow = {
 		replyButton.on( 'click', TalkBelow.onReplyButtonClick, [ replyButton ] );
 
 		// Add to the DOM
-		var $replies = $comment.children( 'dl' );
+		const $replies = $comment.children( 'dl' );
 		if ( $replies.length ) {
 			$replies.before( ' ', replyButton.$element );
 		} else {
@@ -72,7 +72,7 @@ window.TalkBelow = {
 		}
 
 		// Else get the talk wikitext and then add the reply form
-		TalkBelow.getTalkWikitext().done( function () {
+		TalkBelow.getTalkWikitext().done( () => {
 			TalkBelow.addReplyForm( replyButton );
 		} );
 	},
@@ -85,38 +85,38 @@ window.TalkBelow = {
 	addReplyForm: function ( replyButton ) {
 
 		// In most cases, the relevant wikitext is that of the comment we're replying to
-		var $replyButton = replyButton.$element;
-		var $comment = $replyButton.closest( 'p, dd' );
-		var relevantWikitext = TalkBelow.getRelevantWikitext( $comment );
+		const $replyButton = replyButton.$element;
+		const $comment = $replyButton.closest( 'p, dd' );
+		let relevantWikitext = TalkBelow.getRelevantWikitext( $comment );
 
 		// But if the comment already has replies
 		// then the relevant wikitext is that of the last reply
 		// because we need to add the new reply below the last one
-		var $replies = $comment.is( 'p' ) ? $comment.next( 'dl' ) : $comment.children( 'dl' );
+		let $replies = $comment.is( 'p' ) ? $comment.next( 'dl' ) : $comment.children( 'dl' );
 		if ( $replies.length ) {
-			var $lastReply = $replies.children( 'dd' ).last();
+			const $lastReply = $replies.children( 'dd' ).last();
 			relevantWikitext = TalkBelow.getRelevantWikitext( $lastReply );
 		}
 
 		// If no relevant wikitext is found, fallback to regular edit
 		if ( !relevantWikitext ) {
-			var $section = TalkBelow.getSection( $comment );
-			var sectionNumber = $section ? 1 + $section.prevAll( 'h1, h2, h3, h4, h5, h6' ).length : 0;
-			var page = mw.config.get( 'wgPageName' );
-			var talk = new mw.Title( page ).getTalkPage();
-			var editUrl = mw.util.getUrl( talk.getPrefixedText(), { action: 'edit', section: sectionNumber } );
+			const $section = TalkBelow.getSection( $comment );
+			const sectionNumber = $section ? 1 + $section.prevAll( 'h1, h2, h3, h4, h5, h6' ).length : 0;
+			const page = mw.config.get( 'wgPageName' );
+			const talk = new mw.Title( page ).getTalkPage();
+			const editUrl = mw.util.getUrl( talk.getPrefixedText(), { action: 'edit', section: sectionNumber } );
 			window.location.href = editUrl;
 			return;
 		}
 
 		// Make the reply form
-		var replyInput = new OO.ui.MultilineTextInputWidget( { name: 'reply', autosize: true, autofocus: true } );
-		var replyLayout = new OO.ui.HorizontalLayout( { items: [ replyInput ] } );
-		var publishButton = new OO.ui.ButtonInputWidget( { flags: [ 'primary', 'progressive' ], label: mw.msg( 'talkbelow-publish' ) } );
-		var cancelButton = new OO.ui.ButtonInputWidget( { flags: 'destructive', framed: false, label: mw.msg( 'talkbelow-cancel' ) } );
-		var buttonsLayout = new OO.ui.HorizontalLayout( { items: [ publishButton, cancelButton ] } );
-		var form = new OO.ui.FormLayout( { items: [ replyLayout, buttonsLayout ] } );
-		var $formWrapper = $( '<dd>' ).html( form.$element );
+		const replyInput = new OO.ui.MultilineTextInputWidget( { name: 'reply', autosize: true, autofocus: true } );
+		const replyLayout = new OO.ui.HorizontalLayout( { items: [ replyInput ] } );
+		const publishButton = new OO.ui.ButtonInputWidget( { flags: [ 'primary', 'progressive' ], label: mw.msg( 'talkbelow-publish' ) } );
+		const cancelButton = new OO.ui.ButtonInputWidget( { flags: 'destructive', framed: false, label: mw.msg( 'talkbelow-cancel' ) } );
+		const buttonsLayout = new OO.ui.HorizontalLayout( { items: [ publishButton, cancelButton ] } );
+		const form = new OO.ui.FormLayout( { items: [ replyLayout, buttonsLayout ] } );
+		const $formWrapper = $( '<dd>' ).html( form.$element );
 
 		// Make the font-family monospace to suggest that [[wikitext]] is allowed
 		replyInput.$element.css( 'font-family', 'monospace' );
@@ -137,7 +137,7 @@ window.TalkBelow = {
 		publishButton.on( 'click', TalkBelow.onSubmitReply, [ $comment, $formWrapper, relevantWikitext, publishButton, cancelButton, replyButton ] );
 
 		// Handle a cancel
-		cancelButton.on( 'click', function () {
+		cancelButton.on( 'click', () => {
 			$formWrapper.remove();
 			if ( $replies.children().length === 0 ) {
 				$replies.remove();
@@ -159,8 +159,8 @@ window.TalkBelow = {
 	onSubmitReply: function ( $comment, $formWrapper, relevantWikitext, publishButton, cancelButton, replyButton ) {
 
 		// Check that the user wrote something
-		var $reply = $formWrapper.find( 'textarea[name="reply"]' );
-		var reply = $reply.val();
+		const $reply = $formWrapper.find( 'textarea[name="reply"]' );
+		let reply = $reply.val();
 		if ( !reply ) {
 			$reply.trigger( 'focus' );
 			return;
@@ -172,9 +172,9 @@ window.TalkBelow = {
 		cancelButton.setDisabled( true );
 
 		// Calculate the appropriate number of colons
-		var depth = $comment.parents( 'dl' ).length + 1;
-		var colons = '';
-		for ( var i = 0; i < depth; i++ ) {
+		const depth = $comment.parents( 'dl' ).length + 1;
+		let colons = '';
+		for ( let i = 0; i < depth; i++ ) {
 			colons += ':';
 		}
 
@@ -183,20 +183,20 @@ window.TalkBelow = {
 		reply = reply.replace( /\n+/g, ' ' );
 
 		// Build the final wikitext of the reply
-		var replyWikitext = '\n' + colons + reply + ' ~~~~';
+		const replyWikitext = '\n' + colons + reply + ' ~~~~';
 
 		// Submit the reply
 		TalkBelow.talkWikitext = TalkBelow.talkWikitext.replace( relevantWikitext, relevantWikitext + replyWikitext );
-		var page = mw.config.get( 'wgPageName' );
-		var talk = new mw.Title( page ).getTalkPage();
-		var params = {
+		const page = mw.config.get( 'wgPageName' );
+		const talk = new mw.Title( page ).getTalkPage();
+		const params = {
 			action: 'edit',
 			title: talk.getPrefixedText(),
 			text: TalkBelow.talkWikitext,
 			summary: mw.msg( 'talkbelow-summary' ),
 			tags: mw.config.get( 'wgTalkBelowChangeTag' )
 		};
-		new mw.Api().postWithEditToken( params ).fail( TalkBelow.onError ).done( function () {
+		new mw.Api().postWithEditToken( params ).fail( TalkBelow.onError ).done( () => {
 			TalkBelow.onSubmitReplySuccess( replyWikitext, replyButton, $formWrapper );
 		} );
 	},
@@ -209,9 +209,9 @@ window.TalkBelow = {
 	 * @param {Object} $formWrapper
 	 */
 	onSubmitReplySuccess: function ( replyWikitext, replyButton, $formWrapper ) {
-		var page = mw.config.get( 'wgPageName' );
-		var talk = new mw.Title( page ).getTalkPage();
-		var params = {
+		const page = mw.config.get( 'wgPageName' );
+		const talk = new mw.Title( page ).getTalkPage();
+		const params = {
 			action: 'parse',
 			title: talk.getPrefixedText(),
 			text: replyWikitext,
@@ -220,10 +220,10 @@ window.TalkBelow = {
 			prop: 'text',
 			disablelimitreport: true
 		};
-		new mw.Api().get( params ).fail( TalkBelow.onError ).done( function ( data ) {
-			var text = data.parse.text;
-			var $html = $( text );
-			var $reply = $html.find( 'dd' ).last();
+		new mw.Api().get( params ).fail( TalkBelow.onError ).done( ( data ) => {
+			const text = data.parse.text;
+			const $html = $( text );
+			const $reply = $html.find( 'dd' ).last();
 			$formWrapper.replaceWith( $reply );
 			replyButton.setDisabled( false );
 			TalkBelow.addReplyButton.call( $reply );
@@ -236,22 +236,22 @@ window.TalkBelow = {
 	addNewTopicForm: function () {
 
 		// Build the form
-		var titleInput = new OO.ui.TextInputWidget( { name: 'title', placeholder: mw.msg( 'talkbelow-title' ) } );
-		var commentInput = new OO.ui.MultilineTextInputWidget( { name: 'comment', autosize: true, placeholder: mw.msg( 'talkbelow-comment' ) } );
-		var publishButton = new OO.ui.ButtonInputWidget( { flags: [ 'primary', 'progressive' ], label: mw.msg( 'talkbelow-publish' ) } );
-		var titleLayout = new OO.ui.HorizontalLayout( { items: [ titleInput ] } );
-		var commentLayout = new OO.ui.HorizontalLayout( { items: [ commentInput ] } );
-		var publishLayout = new OO.ui.HorizontalLayout( { items: [ publishButton ] } );
-		var formLayout = new OO.ui.FormLayout( { items: [ titleLayout, commentLayout, publishLayout ] } );
-		var $title = $( '<h2>' ).text( mw.msg( 'talkbelow-new-topic' ) );
-		var $form = $( '<div>' ).attr( 'id', 'talkbelow-new-topic-form' ).append( $title, formLayout.$element );
+		const titleInput = new OO.ui.TextInputWidget( { name: 'title', placeholder: mw.msg( 'talkbelow-title' ) } );
+		const commentInput = new OO.ui.MultilineTextInputWidget( { name: 'comment', autosize: true, placeholder: mw.msg( 'talkbelow-comment' ) } );
+		const publishButton = new OO.ui.ButtonInputWidget( { flags: [ 'primary', 'progressive' ], label: mw.msg( 'talkbelow-publish' ) } );
+		const titleLayout = new OO.ui.HorizontalLayout( { items: [ titleInput ] } );
+		const commentLayout = new OO.ui.HorizontalLayout( { items: [ commentInput ] } );
+		const publishLayout = new OO.ui.HorizontalLayout( { items: [ publishButton ] } );
+		const formLayout = new OO.ui.FormLayout( { items: [ titleLayout, commentLayout, publishLayout ] } );
+		const $title = $( '<h2>' ).text( mw.msg( 'talkbelow-new-topic' ) );
+		const $form = $( '<div>' ).attr( 'id', 'talkbelow-new-topic-form' ).append( $title, formLayout.$element );
 
 		// Make the font-family monospace to suggest that [[wikitext]] is allowed
 		commentInput.$element.css( 'font-family', 'monospace' );
 
 		// Replace the "Add topic" button for the form
-		var addTopicButton = document.getElementById( 'talkbelow-add-topic-button' );
-		var $addTopicButton = $( addTopicButton );
+		const addTopicButton = document.getElementById( 'talkbelow-add-topic-button' );
+		const $addTopicButton = $( addTopicButton );
 		$addTopicButton.replaceWith( $form );
 
 		// Handle submissions
@@ -264,11 +264,11 @@ window.TalkBelow = {
 	onSubmitNewTopic: function ( publishButton ) {
 
 		// Get the data from the form
-		var $form = publishButton.$element.closest( '#talkbelow-new-topic-form' );
-		var $title = $form.find( 'input[name="title"]' );
-		var $comment = $form.find( 'textarea[name="comment"]' );
-		var title = $title.val();
-		var comment = $comment.val();
+		const $form = publishButton.$element.closest( '#talkbelow-new-topic-form' );
+		const $title = $form.find( 'input[name="title"]' );
+		const $comment = $form.find( 'textarea[name="comment"]' );
+		const title = $title.val();
+		const comment = $comment.val();
 
 		// Do some basic validation
 		if ( !title ) {
@@ -285,10 +285,10 @@ window.TalkBelow = {
 		publishButton.setDisabled( true );
 
 		// Submit the new topic
-		var page = mw.config.get( 'wgPageName' );
-		var talk = new mw.Title( page ).getTalkPage();
-		var text = comment + ' ~~~~'; // Append the signature
-		var params = {
+		const page = mw.config.get( 'wgPageName' );
+		const talk = new mw.Title( page ).getTalkPage();
+		const text = comment + ' ~~~~'; // Append the signature
+		const params = {
 			action: 'edit',
 			title: talk.getPrefixedText(),
 			section: 'new',
@@ -296,7 +296,7 @@ window.TalkBelow = {
 			text: text,
 			tags: mw.config.get( 'wgTalkBelowChangeTag' )
 		};
-		new mw.Api().postWithEditToken( params ).fail( TalkBelow.onError ).done( function () {
+		new mw.Api().postWithEditToken( params ).fail( TalkBelow.onError ).done( () => {
 			TalkBelow.onSubmitNewTopicSuccess( talk, title, text, $form );
 		} );
 	},
@@ -310,7 +310,7 @@ window.TalkBelow = {
 	 * @param {Object} $form New topic form
 	 */
 	onSubmitNewTopicSuccess: function ( talk, title, text, $form ) {
-		var params = {
+		const params = {
 			action: 'parse',
 			title: talk.getPrefixedText(),
 			section: 'new',
@@ -321,11 +321,11 @@ window.TalkBelow = {
 			pst: true,
 			disablelimitreport: true
 		};
-		new mw.Api().get( params ).fail( TalkBelow.onError ).done( function ( data ) {
+		new mw.Api().get( params ).fail( TalkBelow.onError ).done( ( data ) => {
 			// Remove the outer <div>
-			var div = data.parse.text;
-			var topic = $( div ).html();
-			var $topic = $( topic );
+			const div = data.parse.text;
+			const topic = $( div ).html();
+			const $topic = $( topic );
 
 			// Replace the form with the new topic
 			$form.replaceWith( $topic );
@@ -352,15 +352,15 @@ window.TalkBelow = {
 	 * @return {Object} Promise
 	 */
 	getTalkWikitext: function () {
-		var page = mw.config.get( 'wgPageName' );
-		var talk = new mw.Title( page ).getTalkPage();
-		var params = {
+		const page = mw.config.get( 'wgPageName' );
+		const talk = new mw.Title( page ).getTalkPage();
+		const params = {
 			page: talk.getPrefixedText(),
 			action: 'parse',
 			prop: 'wikitext',
 			formatversion: 2
 		};
-		return new mw.Api().get( params ).done( function ( data ) {
+		return new mw.Api().get( params ).done( ( data ) => {
 			TalkBelow.talkWikitext = data.parse.wikitext;
 		} );
 	},
@@ -383,7 +383,7 @@ window.TalkBelow = {
 	 */
 	getRelevantWikitext: function ( $comment ) {
 		// The longest text node has the most chances of being unique
-		var text = TalkBelow.getLongestText( $comment );
+		let text = TalkBelow.getLongestText( $comment );
 
 		// Some comments may not have text nodes at all
 		if ( !text ) {
@@ -394,9 +394,9 @@ window.TalkBelow = {
 		text = text.replace( /\u00a0/g, ' ' ); // Replace nbsp sometimes added by the browser
 		text = text.replace( /[.*+?^${}()|[\]\\]/g, '\\$&' ); // Escape special characters
 
-		var regexp = new RegExp( '.*' + text + '.*', 'g' );
+		const regexp = new RegExp( '.*' + text + '.*', 'g' );
 
-		var matches = TalkBelow.talkWikitext.match( regexp );
+		const matches = TalkBelow.talkWikitext.match( regexp );
 
 		// This may happen if the comments comes from a template
 		if ( !matches ) {
@@ -419,12 +419,12 @@ window.TalkBelow = {
 	 * @return {string} Text of the longest text node
 	 */
 	getLongestText: function ( $comment ) {
-		var text = '';
-		var $textNodes = $comment.contents().filter( function () {
+		let text = '';
+		const $textNodes = $comment.contents().filter( function () {
 			return this.nodeType === 3; // Text node
 		} );
 		$textNodes.each( function () {
-			var nodeText = $( this ).text().trim();
+			const nodeText = $( this ).text().trim();
 			if ( nodeText.length > text.length ) {
 				text = nodeText;
 			}
@@ -442,12 +442,12 @@ window.TalkBelow = {
 	 */
 	makeSummary: function ( summary, $comment, wikitext ) {
 		if ( !summary ) {
-			var page = mw.config.get( 'talkbelow-page', 'mw:TalkBelow' );
+			const page = mw.config.get( 'talkbelow-page', 'mw:TalkBelow' );
 			summary = wikitext ? mw.msg( 'talkbelow-summary-edit', page ) : mw.msg( 'talkbelow-summary-delete', page );
 		}
-		var $section = TalkBelow.getSection( $comment );
+		const $section = TalkBelow.getSection( $comment );
 		if ( $section ) {
-			var section = $section.find( '.mw-headline' ).attr( 'id' ).replace( '/_/g', ' ' );
+			const section = $section.find( '.mw-headline' ).attr( 'id' ).replace( '/_/g', ' ' );
 			summary = '/* ' + section + ' */ ' + summary;
 		}
 		summary += ' #talkbelow'; // For https://hashtags.wmcloud.org
@@ -468,11 +468,11 @@ window.TalkBelow = {
 		if ( $element.is( 'h1, h2, h3, h4, h5, h6' ) ) {
 			return $element;
 		}
-		var $previous = $element.prevAll( 'h1, h2, h3, h4, h5, h6' ).first();
+		const $previous = $element.prevAll( 'h1, h2, h3, h4, h5, h6' ).first();
 		if ( $previous.length ) {
 			return $previous;
 		}
-		var $parent = $element.parent();
+		const $parent = $element.parent();
 		return TalkBelow.getSection( $parent );
 	}
 };
