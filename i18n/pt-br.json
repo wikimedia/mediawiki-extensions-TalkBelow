@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Eduardoaddad"
+		]
+	},
+	"talkbelow-desc": "Mostrar a página de discussão abaixo do conteúdo",
+	"talkbelow-reply": "Responder",
+	"talkbelow-cancel": "Cancelar",
+	"talkbelow-new-topic": "Novo tópico",
+	"talkbelow-title": "Título",
+	"talkbelow-comment": "Comentário",
+	"talkbelow-publish": "Publicar",
+	"talkbelow-summary": "Responder",
+	"talkbelow-error": "Ocorreu um erro! $1"
+}
