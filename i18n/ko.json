@@ -1,8 +1,17 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ykhwong"
+			"Ykhwong",
+			"Tensama0415"
 		]
 	},
-	"talkbelow-cancel": "취소"
+	"talkbelow-desc": "내용 아래에 토론 문서를 표시합니다",
+	"talkbelow-reply": "답글",
+	"talkbelow-cancel": "취소",
+	"talkbelow-new-topic": "새 주제",
+	"talkbelow-title": "제목",
+	"talkbelow-comment": "댓글",
+	"talkbelow-publish": "게시",
+	"talkbelow-summary": "답변",
+	"talkbelow-error": "무언가가 잘못되었습니다! $1"
 }
