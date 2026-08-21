@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Wizzard"
+		]
+	},
+	"talkbelow-desc": "Zobrazuje diskusnú stránku pod obsahom",
+	"talkbelow-reply": "Odpovedať",
+	"talkbelow-cancel": "Zrušiť",
+	"talkbelow-new-topic": "Nová téma",
+	"talkbelow-title": "Názov",
+	"talkbelow-comment": "Komentár",
+	"talkbelow-publish": "Zverejniť",
+	"talkbelow-summary": "Odpoveď",
+	"talkbelow-error": "Niečo sa pokazilo! $1"
+}
