@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"شاه زمان پټان"
+		]
+	},
+	"talkbelow-desc": "د خبرو اترو مخ د منځپانگې لاندې ښودل",
+	"talkbelow-reply": "ځوابول",
+	"talkbelow-cancel": "ناگارل",
+	"talkbelow-new-topic": "نوې سکالو",
+	"talkbelow-title": "سرليک",
+	"talkbelow-comment": "څرگندونه",
+	"talkbelow-publish": "خپرول",
+	"talkbelow-summary": "ځوابول",
+	"talkbelow-error": "يو څه ناسم پېښ شول! $1"
+}
